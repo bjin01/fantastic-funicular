@@ -1,0 +1,43 @@
+<!DOCTYPE html> 
+
+<html> 
+<head> 
+	<title>Azure Login</title> 
+</head> 
+<body> 
+    <h2 style = "text-align: center;">MS Azure Login Form</h2>
+		
+      {% for message in form.subscriptionid.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+      
+      {% for message in form.clientid.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+      
+      {% for message in form.secret.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+      
+      {% for message in form.tenant.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+    
+    <form action = {{ url_for('login') }} method = post>
+            <fieldset>
+                <legend style = font-size:14px; font-weight:bold; margin-left:150px;text-align:center>Credential Form</legend>
+                {{ form.hidden_tag() }}
+                
+                <div style = font-size:14px; font-weight:bold; margin-left:150px;text-align:center>
+                {{ form.subscriptionid.label }}<br>{{ form.subscriptionid }}
+                <br>{{ form.clientid.label }}<br>{{ form.clientid }}
+                <br>{{ form.secret.label }} <br>{{ form.secret }}
+                <br>{{ form.tenant.label }}<br>{{ form.tenant }}
+                <br>
+                {{ form.submit }}
+                </div>
+            
+            </fieldset>
+        </form>
+    </body> 
+</html> 

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+   <body>
+      {% if vmlist %}
+         <table border = 1>
+         
+            <tr>
+               <th>VM:</th>
+               <th>Location:</th>
+               <th>Status:</th>
+               <th>Select:</th>
+            </tr>
+         {% for key, value in vmlist.iteritems() %}
+            <tr>
+                <td> {{ key }} </td>
+                <td> {{ value['location']}} </td>
+                <td> {{ value['displayStatus']}} </td>
+            </tr>
+         {% endfor %}
+          </table>
+      {% else %}
+         <h1>No VM found</h1>
+      {% endif %}  
+   </body>
+</html>
