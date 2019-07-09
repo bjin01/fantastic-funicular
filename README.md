@@ -105,6 +105,6 @@ start command:   python app.py
 ````
 ### hint:
 Using this demo you need to have azure account with app credentials prepared.
-More info go here: [How to: Use the portal to create an Azure AD application and service principal that can access resources][https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal]
+More info go here: [How to: Use the portal to create an Azure AD application and service principal that can access resources](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal)
 
 
