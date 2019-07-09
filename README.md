@@ -102,7 +102,9 @@ start command:   python app.py
      state     since                  cpu    memory         disk         details
 #0   running   2019-07-09T15:58:44Z   0.0%   1.8M of 512M   224K of 2G
 
-
-`
+````
+### hint:
+Using this demo you need to have azure account with app credentials prepared.
+More info go here: [https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal]
 
 
