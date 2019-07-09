@@ -1,12 +1,16 @@
-<!DOCTYPE html>
-<html>
-   <body>
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="p-3 mb-2 bg-dark text-white">
+    <h2 style = "text-align: center;">Microsoft Azure Information</h2>
+    </div>
       {% if vmlist %}
-         <table border = 1>
-         
+      <form action= {{ url_for('actions') }} method="post">
+         <table class="table table-striped">
             <tr>
                <th>VM:</th>
                <th>Location:</th>
+               <th>Public-IP:</th>
                <th>Status:</th>
                <th>Select:</th>
             </tr>
@@ -14,12 +18,24 @@
             <tr>
                 <td> {{ key }} </td>
                 <td> {{ value['location']}} </td>
+                <td>
+                {% for ip in value['public_ip'] %}
+                     {{ ip }} 
+                {% endfor %}
+                </td>
                 <td> {{ value['displayStatus']}} </td>
+                <td><input type="checkbox" id={{ key  }} name="found_vm" value= {{ key }}></td>
             </tr>
          {% endfor %}
           </table>
+          <input type="Submit" class="btn btn-success" name="actionsBtn" value="Start">
+          <input type="Submit" class="btn btn-danger" name="actionsBtn" value="Stop">
+          <input type="Submit" class="btn btn-warning" name="actionsBtn" value="Deallocate">
+        </form>
+        {% if result %}
+          <p>{{ result }}</p>
+        {% endif %}
       {% else %}
          <h1>No VM found</h1>
-      {% endif %}  
-   </body>
-</html>
+      {% endif %} 
+{% endblock %}

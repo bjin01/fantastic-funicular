@@ -2,6 +2,8 @@
 from azure.mgmt.compute import ComputeManagementClient
 from azure.common.credentials import ServicePrincipalCredentials
 #from azure.mgmt.compute.models import DiskCreateOption
+from azure.mgmt.network import NetworkManagementClient
+
 
 
 GROUP_NAME = 'bojin'
@@ -42,7 +44,24 @@ def awslogin(SUBCRIPTION_ID, CLIENT, KEY,  TENANT_ID):
     COMPUTE_CLIENT = ComputeManagementClient(credentials, SUBCRIPTION_ID)
     print(COMPUTE_CLIENT)
     return
-
+    
+def get_public_ip(SUBCRIPTION_ID):
+    networks = []
+    network_client = NetworkManagementClient(credentials, SUBCRIPTION_ID)
+    result_list = network_client.virtual_networks.list(GROUP_NAME )
+    for i in result_list:
+        print(i.name)
+        networks.append(i.name)
+    public_ip_list = network_client.public_ip_addresses.list(GROUP_NAME)
+    for x in public_ip_list:
+        print(x.id)
+        print(x.ip_address)
+        print(x.tags)
+        print(x.ip_tags)
+        print(x.dns_settings)
+    
+    return
+    
 if __name__ == "__main__":
     #print(subscriptionid, client_id, secret,  tenant)
     credentials = ServicePrincipalCredentials(
@@ -52,3 +71,4 @@ if __name__ == "__main__":
 )
     awslogin(SUBCRIPTION_ID, CLIENT,  KEY, TENANT_ID)
     getaws()
+    get_public_ip(SUBCRIPTION_ID)

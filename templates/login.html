@@ -1,12 +1,8 @@
-<!DOCTYPE html> 
-
-<html> 
-<head> 
-	<title>Azure Login</title> 
-</head> 
-<body> 
-    <h2 style = "text-align: center;">MS Azure Login Form</h2>
-		
+{% extends "base.html" %}
+{% block content %}
+    <div class="p-3 mb-2 bg-dark text-white">
+    <h2 style = "text-align: center;">Microsoft Azure Login</h2>
+    </div>
       {% for message in form.subscriptionid.errors %}
          <div>{{ message }}</div>
       {% endfor %}
@@ -22,22 +18,20 @@
       {% for message in form.tenant.errors %}
          <div>{{ message }}</div>
       {% endfor %}
-    
+   
     <form action = {{ url_for('login') }} method = post>
-            <fieldset>
-                <legend style = font-size:14px; font-weight:bold; margin-left:150px;text-align:center>Credential Form</legend>
+            <fieldset class="form-group">
+                <legend >Credential Form</legend>
+                <div class="form-group">
                 {{ form.hidden_tag() }}
-                
-                <div style = font-size:14px; font-weight:bold; margin-left:150px;text-align:center>
-                {{ form.subscriptionid.label }}<br>{{ form.subscriptionid }}
-                <br>{{ form.clientid.label }}<br>{{ form.clientid }}
-                <br>{{ form.secret.label }} <br>{{ form.secret }}
-                <br>{{ form.tenant.label }}<br>{{ form.tenant }}
+                {{ form.subscriptionid.label }}<br>{{ form.subscriptionid(class_="form-control") }}
+                <br>{{ form.clientid.label }}<br>{{ form.clientid(class_="form-control") }}
+                <br>{{ form.secret.label }} <br>{{ form.secret(class_="form-control") }}
+                <br>{{ form.tenant.label }}<br>{{ form.tenant(class_="form-control") }}
+                 <br>{{ form.group.label }}<br>{{ form.group(class_="form-control") }}
                 <br>
-                {{ form.submit }}
                 </div>
-            
+                {{ form.submit(class="btn btn-primary") }}      
             </fieldset>
         </form>
-    </body> 
-</html> 
+{% endblock %}

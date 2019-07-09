@@ -7,4 +7,5 @@ class ContactForm(FlaskForm):
    clientid = TextField("Client ID",[validators.Required("Please enter your Azure Client ID.")])
    secret = TextField("App Secret",[validators.Required("Please enter your Azure app secret key.")])
    tenant = TextField("Tenant ID",[validators.Required("Please enter your Azure Tenant ID.")])
+   group = TextField("Resource Group name",[validators.Required("Please enter your Azure resource group name.")])
    submit = SubmitField("Login")
