@@ -37,20 +37,23 @@ def login():
 @app.route('/aws', methods = ['POST', 'GET'])
 def aws():
     vmlist = {}
-    for v in EC2_CLIENT.virtual_machines.list_all():
-        vmlist[v.name] = {}
-        vm = EC2_CLIENT.virtual_machines.get(GROUP_NAME, v.name, expand='instanceView')
-        vmlist[v.name]['computerName'] = vm.os_profile.computer_name
-        vmlist[v.name]['location'] = vm.location
-        vmlist[v.name]['public_ip'] = get_public_ip(v.name)
-        for stat in vm.instance_view.statuses:
-            vmlist[v.name]['displayStatus'] = stat.display_status
-    return render_template('azure.html', vmlist = vmlist)
+    try:
+        for v in EC2_CLIENT.virtual_machines.list_all():
+            vmlist[v.name] = {}
+            vm = EC2_CLIENT.virtual_machines.get(GROUP_NAME, v.name, expand='instanceView')
+            vmlist[v.name]['computerName'] = vm.os_profile.computer_name
+            vmlist[v.name]['location'] = vm.location
+            vmlist[v.name]['public_ip'] = get_public_ip(v.name)
+            for stat in vm.instance_view.statuses:
+                vmlist[v.name]['displayStatus'] = stat.display_status
+        return render_template('azure.html', vmlist = vmlist)
+    except NameError as err:
+        errortext = "You are not logged into to Microsoft Azure yet! Use Login and enter credentials to continue."
+        return render_template('error.html',  errortext = errortext,  err = err )
 
 @app.route('/actions', methods = ['POST', 'GET'])
 def actions():
     if request.method == 'POST':
-        
         if request.form['actionsBtn'] == "Start":
             print(request.form['actionsBtn'])
             found_vm_list = request.form.getlist("found_vm")
